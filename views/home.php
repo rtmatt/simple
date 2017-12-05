@@ -1,0 +1,1 @@
+homepage!<?php echo date('Y')?>
