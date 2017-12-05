@@ -17,6 +17,9 @@ composer install
 ```
 
 Install Front End Dependencies
+```  
+npm install 
+```
 
 Usage
 ------------
