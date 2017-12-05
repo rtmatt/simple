@@ -5,18 +5,25 @@ namespace App;
 class PagesController
 {
 
+
+    private static function getMasterLayout()
+    {
+        return __DIR__ . '/../views/layouts/main.php';
+    }
+
     public static function showPage($page)
     {
-        $str = __DIR__ . "/../views/{$page}.php";
-        if ( ! file_exists($str)) {
+        $self = new static();
+        $viewFile = __DIR__ . "/../views/{$page}.php";
+        if ( ! file_exists($viewFile)) {
             throw new \Phroute\Phroute\Exception\HttpRouteNotFoundException('View for page not found:\'' . $page . '\'');
         }
+
         ob_start();
-        include $str;
+        include $viewFile;
         extract([ 'content' => ob_get_clean() ]);
         ob_start();
-        include __DIR__ . '/../views/main.php';
-
+        include self::getMasterLayout();
         return ob_get_clean();
     }
 
